@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/profile_image_view"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerVertical="true"
+        tools:background="#f00"/>
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/profile_image_view"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textStyle="bold"
+        tools:text="記事のタイトル"/>
+    <TextView
+        android:id="@+id/user_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_text_view"
+        android:layout_toEndOf="@+id/profile_image_view"
+        android:layout_marginStart="16dp"
+        android:maxLines="1"
+        android:textStyle="bold"
+        tools:text="ユーザー名"/>
+
+</RelativeLayout>
