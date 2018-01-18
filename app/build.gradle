@@ -35,7 +35,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-//    compile 'org.parceler:parceler-api:1.1.9'
-//    annotationProcessor 'org.parceler:parceler:1.1.9'
+
+//    compile 'io.reactivex.rxjava:rxjava:2.0.3'
+    def retrofit_version = '2.0.2'
+    compile "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${retrofit_version}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }
 
