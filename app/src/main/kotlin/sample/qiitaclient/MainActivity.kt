@@ -2,21 +2,24 @@ package sample.qiitaclient
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-//import io.reactivex.schedulers.Schedulers
+
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 
 import retrofit2.converter.gson.GsonConverterFactory
+import rx.Observer
 import sample.qiitaclient.client.ArticleClient
-import sample.qiitaclient.extension.toast
 import sample.qiitaclient.model.Article
 import sample.qiitaclient.model.User
 import sample.qiitaclient.view.ArticleListAdapter
+import rx.schedulers.Schedulers
+import rx.android.schedulers.AndroidSchedulers;
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create()
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://qiita.com")
+                .baseUrl("https://qiita.com/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
@@ -67,13 +70,26 @@ class MainActivity : AppCompatActivity() {
         searchButton.setOnClickListener {
 
 
+
         }
+        Log.d("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@","hogehoge")
+        val service = retrofit.create(ArticleClient::class.java)
+        service.search("kotlin")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({  list ->
+                        Log.d("list",list.toString())
+                        listAdapter.articels = list
+                });
+
 
     }
 
     private fun dummyArticle(title: String, userName: String) : Article {
         return Article("1",title, "https://qiita.com/RyotaMurohoshi/items/01b370f34a4bf96f5c39",
-                User("",userName,"")
+                User("",userName,"https://scontent-nrt1-1.xx.fbcdn.net/v/t1.0-9/26814525_806848632835064_3725210286736551885_n.jpg?oh=b2f55ca083688436f3998d4f71999eea&oe=5AE40326")
         )
     }
 }
+
+

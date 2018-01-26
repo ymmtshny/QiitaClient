@@ -1,6 +1,7 @@
 package sample.qiitaclient.client
 
-import android.database.Observable
+//import android.database.Observable
+import rx.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 import sample.qiitaclient.model.Article
@@ -11,6 +12,6 @@ import sample.qiitaclient.model.Article
 
 interface ArticleClient {
 
-    @GET("/api/v2/items")
+    @GET("items")
     fun search(@Query("query") query: String): Observable<List<Article>>
 }
